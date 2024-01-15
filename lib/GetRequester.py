@@ -1,3 +1,17 @@
+# import requests
+# import json
+
+# class GetRequester:
+
+#     def __init__(self, url):
+#         self.url = url
+
+#     def get_response_body(self):
+#         pass
+
+#     def load_json(self):
+#         pass
+
 import requests
 import json
 
@@ -7,7 +21,14 @@ class GetRequester:
         self.url = url
 
     def get_response_body(self):
-        pass
+        response = requests.get(self.url)
+        return response.text
 
     def load_json(self):
-        pass
+        response_body = self.get_response_body()
+        try:
+            json_data = json.loads(response_body)
+            return json_data
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON: {e}")
+            return None
